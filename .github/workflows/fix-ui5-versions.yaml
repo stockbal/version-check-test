@@ -1,17 +1,11 @@
-name: Continuous Integration
+name: Fix outdated UI5 versions
 
 on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
-  check-ui5-versions:
-    name: Check UI5 versions
+  fix-ui5-versions:
+    name: Update UI5 versions
     runs-on: ubuntu-latest
 
     steps:
@@ -19,20 +13,13 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Check UI5 versions
+      - name: Update UI5 versions
         id: check-ui5
-        uses: DevEpos/check-outdated-ui5-version@v0.0.1
+        uses: DevEpos/check-outdated-ui5-version@latest
         with:
-          useLTS: true
           fixOutdated: true
           manifestPaths: |
             app/**/webapp
-
-      - name: Print Output
-        id: output
-        run: |
-          echo "${{ steps.check-ui5.outputs.foundManifests }}"
-          echo "${{ steps.check-ui5.outputs.modifiedFiles }}"
 
       - name: Create Pull Request
         if: ${{ steps.check-ui5.outputs.modifiedFiles != '' }}
@@ -47,7 +34,3 @@ jobs:
             ```
             ${{ steps.check-ui5.outputs.modifiedFiles }}
             ```
-
-
-
-
