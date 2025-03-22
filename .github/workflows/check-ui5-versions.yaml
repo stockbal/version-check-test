@@ -20,7 +20,7 @@ jobs:
 
       - name: Check UI5 versions
         id: check-ui5
-        uses: DevEpos/check-outdated-ui5-version
+        uses: DevEpos/check-outdated-ui5-version@latest
         with:
           useLTS: true
           fixOutdated: true
