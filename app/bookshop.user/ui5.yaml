@@ -1,0 +1,44 @@
+specVersion: "4.0"
+metadata:
+  name: com.devepos.bookshop.admin
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+    - name: ui5-tooling-transpile-middleware
+      afterMiddleware: compression
+      configuration:
+        debug: true
+        transpileDependencies: true
+        transformModulesToUI5:
+          overridesToOverride: true
+        excludePatterns:
+          - /Component-preload.js
+    # - name: ui5-tooling-modules-middleware
+    #   afterMiddleware: compression
+    #  # afterMiddleware: ui5-tooling-transpile-middleware
+    #   configuration:
+    #     debug: true
+    #     legacyDependencyResolution: true
+    #     removeScopePrefix: true          
+    # Load non .ts resources directly from the sources
+    - name: fiori-tools-servestatic
+      afterMiddleware: ui5-tooling-transpile-middleware
+      configuration:
+        paths:
+          # Themes have to be loaded from the 'dist' folder
+          - path: /resources/com/devepos/bookshop/lib/themes
+            src: "./../bookshop.lib/dist/resources/com/devepos/bookshop/lib/themes"
+          - path: /resources/com/devepos/bookshop/lib
+            src: "./../bookshop.lib/src"
+    - name: fiori-tools-proxy
+      # afterMiddleware: ui5-tooling-modules-middleware
+      # afterMiddleware: ui5-tooling-transpile-middleware
+      afterMiddleware: fiori-tools-servestatic
+      configuration:
+        backend:
+          - path: /resources
+            url: https://ui5.sap.com
+          - path: /test-resources
+            url: https://ui5.sap.com
