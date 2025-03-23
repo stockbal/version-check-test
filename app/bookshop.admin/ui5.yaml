@@ -9,7 +9,7 @@ server:
     - name: ui5-tooling-transpile-middleware
       afterMiddleware: compression
       configuration:
-        debug: true
+        debug: false
         transpileDependencies: true
         transformModulesToUI5:
           overridesToOverride: true
