@@ -15,7 +15,7 @@ jobs:
 
       - name: Update UI5 versions
         id: check-ui5
-        uses: DevEpos/check-outdated-ui5-version@v0.0.2
+        uses: DevEpos/check-outdated-ui5-version@v1
         with:
           fixOutdated: true
           manifestPaths: |
