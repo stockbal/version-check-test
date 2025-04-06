@@ -24,5 +24,6 @@ jobs:
         with:
           manifestPaths: |
             app/**/webapp
+          allowedDaysBeforeEocp: 82
 
 
