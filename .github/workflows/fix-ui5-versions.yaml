@@ -31,6 +31,10 @@ jobs:
           add-paths: ${{ steps.check-ui5.outputs.modifiedFiles }}
           body: |
             This pull request updates the outdated UI5 versions found in the following files:
+
             ```
             ${{ steps.check-ui5.outputs.modifiedFiles }}
             ```
+
+            ${{ steps.check-ui5.outputs.summary}}
+            
