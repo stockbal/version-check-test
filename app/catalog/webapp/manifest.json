@@ -10,6 +10,6 @@
     "title": "{{appTitle}}"
   },
   "sap.platform.cf": {
-    "ui5VersionNumber": "1.129.2"
+    "ui5VersionNumber": "1.129.3"
   }
 }
